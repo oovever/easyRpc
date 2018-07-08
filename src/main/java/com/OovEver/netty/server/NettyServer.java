@@ -1,5 +1,7 @@
 package com.OovEver.netty.server;
 
+import com.OovEver.netty.constant.Constants;
+import com.OovEver.netty.factory.ZookeeperFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,6 +14,11 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.CreateMode;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Netty实现的服务器
@@ -50,11 +57,21 @@ public class NettyServer {
                     });
 //            绑定关口
             ChannelFuture future = bootstrap.bind(8080).sync();
+//            注册服务器到zookeeper中
+            CuratorFramework client = ZookeeperFactory.create();
+//            获取IP地址
+            InetAddress inetAddress = InetAddress.getLocalHost();
+//            在服务器创建临时节点
+            client.create().withMode(CreateMode.EPHEMERAL).forPath(Constants.SERVER_PATH + inetAddress.getHostAddress());
 //            等待，直到异步操作执行完毕，核心思想同await。我们得到Future实例后，可以使用sync()方法来阻塞当前线程，直到异步操作执行完毕。
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             parentGroup.shutdownGracefully();
             childGroup.shutdownGracefully();
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -21,6 +21,11 @@ public class SimpleClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        System.out.println(msg.toString());
+//        接受服务器读写空闲传来的数据
+        if ("ping".equals(msg.toString())) {
+            ctx.channel().writeAndFlush("ping\r\n");
+            return;
+        }
         ctx.channel().attr(AttributeKey.valueOf("clientMsg")).set(msg);
 //        关闭通道
         ctx.channel().close();

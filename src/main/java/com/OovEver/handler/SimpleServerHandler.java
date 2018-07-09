@@ -2,6 +2,9 @@ package com.OovEver.handler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import org.apache.zookeeper.data.Id;
 
 /**
  * 服务端处理器
@@ -15,5 +18,29 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
         ctx.channel().writeAndFlush("is ok\r\n");
 //        ctx.channel().close();
         super.channelRead(ctx, msg);
+    }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+//        如果是IdleStateEvent事件
+        if (evt instanceof IdleStateEvent) {
+            IdleStateEvent event=(IdleStateEvent) evt;
+//            读空闲 60s无事件读
+            if (event.state().equals(IdleState.READER_IDLE)) {
+                System.out.println("读空闲=====");
+                ctx.channel().close();
+            }
+//            写空闲 45秒无写事件发生
+           else if (event.state().equals(IdleState.WRITER_IDLE)) {
+                System.out.println("写空闲=====");
+            }
+//            20s无读写 读写空闲
+            else if (event.state().equals(IdleState.ALL_IDLE)) {
+                System.out.println("读写空闲");
+                ctx.channel().writeAndFlush("ping\r\n");
+            }
+
+        }
+        super.userEventTriggered(ctx, evt);
     }
 }

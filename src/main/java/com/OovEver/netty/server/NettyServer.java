@@ -15,11 +15,13 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Netty实现的服务器
@@ -51,6 +53,8 @@ public class NettyServer {
                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(65535,Delimiters.lineDelimiter()[0]));
 //                        字符串解码器
                             ch.pipeline().addLast(new StringDecoder());
+//                            心跳长连接设置 读空闲 写空闲 所有空闲 时间单位
+                            ch.pipeline().addLast(new IdleStateHandler(60, 45, 20,TimeUnit.SECONDS));
                             ch.pipeline().addLast(new SimpleServerHandler());
 //                        字符串编码器
                             ch.pipeline().addLast(new StringEncoder());

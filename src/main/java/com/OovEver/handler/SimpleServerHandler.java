@@ -1,5 +1,8 @@
 package com.OovEver.handler;
 
+import com.OovEver.handler.param.ServerRequest;
+import com.OovEver.netty.client.Response;
+import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
@@ -15,9 +18,14 @@ public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        服务器写回到client内容
-        ctx.channel().writeAndFlush("is ok\r\n");
+//        ctx.channel().writeAndFlush("is ok\r\n");
 //        ctx.channel().close();
-        super.channelRead(ctx, msg);
+       ServerRequest request=JSONObject.parseObject(msg.toString(), ServerRequest.class);
+        Response response = new Response();
+        response.setId(request.getId());
+        response.setResult("is ok");
+        ctx.channel().writeAndFlush(JSONObject.toJSONString(response));
+        ctx.channel().writeAndFlush("\r\n");
     }
 
     @Override

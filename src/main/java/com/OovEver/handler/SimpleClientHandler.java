@@ -1,5 +1,8 @@
 package com.OovEver.handler;
 
+import com.OovEver.netty.client.DefaultFuture;
+import com.OovEver.netty.client.Response;
+import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
@@ -26,7 +29,10 @@ public class SimpleClientHandler extends ChannelInboundHandlerAdapter {
             ctx.channel().writeAndFlush("ping\r\n");
             return;
         }
-        ctx.channel().attr(AttributeKey.valueOf("clientMsg")).set(msg);
+//        ctx.channel().attr(AttributeKey.valueOf("clientMsg")).set(msg);
+        Response response = JSONObject.parseObject(msg.toString(), Response.class);
+        DefaultFuture.recive(response);
+
 //        关闭通道
         ctx.channel().close();
         super.channelRead(ctx, msg);

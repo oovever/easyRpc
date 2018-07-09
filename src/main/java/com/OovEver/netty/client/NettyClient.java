@@ -55,7 +55,7 @@ public class NettyClient {
             ChannelFuture f = b.connect(host, port).sync(); // (5)
             f.channel().writeAndFlush("hello server");
             f.channel().writeAndFlush("\r\n");
-            // Wait until the connection is closed.
+            // Wait until the connection is closed.等待通道关闭
             f.channel().closeFuture().sync();
 //            设置属性
             Object result = f.channel().attr(AttributeKey.valueOf("clientMsg")).get();

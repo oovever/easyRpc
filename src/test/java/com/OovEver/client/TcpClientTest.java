@@ -1,8 +1,6 @@
-package com.OovEver.netty.client;
+package com.OovEver.client;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author OovEver

@@ -1,4 +1,4 @@
-package com.OovEver.netty.client;
+package com.OovEver.client;
 
 /**
  * 响应类

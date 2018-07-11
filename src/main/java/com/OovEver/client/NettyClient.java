@@ -1,25 +1,19 @@
-package com.OovEver.netty.client;
+package com.OovEver.client;
 
 import com.OovEver.handler.SimpleClientHandler;
-import com.OovEver.netty.constant.Constants;
-import com.OovEver.netty.factory.ZookeeperFactory;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.AttributeKey;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.zookeeper.CreateMode;
 
 /**
  * Netty客户端

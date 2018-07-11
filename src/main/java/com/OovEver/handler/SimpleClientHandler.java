@@ -1,14 +1,10 @@
 package com.OovEver.handler;
 
-import com.OovEver.netty.client.DefaultFuture;
-import com.OovEver.netty.client.Response;
+import com.OovEver.client.DefaultFuture;
+import com.OovEver.client.Response;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelOutboundHandlerAdapter;
-import io.netty.util.AttributeKey;
-
-import javax.naming.Name;
 
 /**
  * 客户端处理器

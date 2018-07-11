@@ -1,8 +1,8 @@
 package com.OovEver.netty.server;
 
 import com.OovEver.handler.SimpleServerHandler;
-import com.OovEver.netty.constant.Constants;
-import com.OovEver.netty.factory.ZookeeperFactory;
+import com.OovEver.constant.Constants;
+import com.OovEver.factory.ZookeeperFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

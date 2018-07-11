@@ -1,6 +1,5 @@
-package com.OovEver.netty.server;
+package com.OovEver.server;
 
-import javafx.application.Application;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,7 +1,8 @@
-package com.OovEver.handler;
+package com.OovEver.netty.handler;
 
-import com.OovEver.handler.param.ServerRequest;
-import com.OovEver.client.Response;
+import com.OovEver.netty.client.Response;
+import com.OovEver.netty.handler.param.ServerRequest;
+import com.OovEver.netty.medium.Media;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -13,13 +14,17 @@ import io.netty.handler.timeout.IdleStateEvent;
  * @author OovEver
  * 2018/7/9 0:24
  */
-public class SimpleServerHandler extends ChannelInboundHandlerAdapter {
+public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        服务器写回到client内容
 //        ctx.channel().writeAndFlush("is ok\r\n");
 //        ctx.channel().close();
        ServerRequest request=JSONObject.parseObject(msg.toString(), ServerRequest.class);
+        Media media = Media.newInstance();
+        Object result = media.process(request);
+
+
         Response response = new Response();
         response.setId(request.getId());
         response.setResult("is ok");

@@ -1,6 +1,6 @@
-package com.OovEver.client;
+package com.OovEver.netty.client;
 
-import com.OovEver.handler.SimpleClientHandler;
+import com.OovEver.netty.handler.SimpleClientHandler;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

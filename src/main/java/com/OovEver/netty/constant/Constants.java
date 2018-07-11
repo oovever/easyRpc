@@ -1,4 +1,4 @@
-package com.OovEver.constant;
+package com.OovEver.netty.constant;
 
 /**
  * @author OovEver

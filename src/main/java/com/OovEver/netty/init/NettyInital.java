@@ -1,8 +1,8 @@
-package com.OovEver.init;
+package com.OovEver.netty.init;
 
-import com.OovEver.handler.SimpleServerHandler;
-import com.OovEver.constant.Constants;
-import com.OovEver.factory.ZookeeperFactory;
+import com.OovEver.netty.handler.SimpleServerHandler;
+import com.OovEver.netty.constant.Constants;
+import com.OovEver.netty.factory.ZookeeperFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class NettyInital implements ApplicationListener<ContextRefreshedEvent> {
-    public static void start() {
+    public  void start() {
 //        线程组的创建 监听端口accept事件 默认只有一个线程
         EventLoopGroup parentGroup = new NioEventLoopGroup();
 //        监听read write 默认启动CPU线程2倍
@@ -86,7 +86,6 @@ public class NettyInital implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        start();
-
+        this.start();
     }
 }

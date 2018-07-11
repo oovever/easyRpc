@@ -1,4 +1,4 @@
-package com.OovEver.handler.param;
+package com.OovEver.netty.handler.param;
 
 /**
  * 接受客户端请求
@@ -10,6 +10,8 @@ public class ServerRequest {
     private long   id;
 //    请求内容
     private Object content;
+//    某个类的方法
+    private String command;
     public long getId() {
         return id;
     }
@@ -26,5 +28,11 @@ public class ServerRequest {
         this.content = content;
     }
 
+    public String getCommand() {
+        return command;
+    }
 
+    public void setCommand(String command) {
+        this.command = command;
+    }
 }

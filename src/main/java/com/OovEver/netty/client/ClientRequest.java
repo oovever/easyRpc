@@ -1,4 +1,4 @@
-package com.OovEver.client;
+package com.OovEver.netty.client;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -14,6 +14,7 @@ public class ClientRequest {
     private       Object     content;
 //    自增ID
     private final AtomicLong aid = new AtomicLong(1);
+    private String command;
     public ClientRequest(){
         id = aid.incrementAndGet();
 
@@ -34,6 +35,11 @@ public class ClientRequest {
         return aid;
     }
 
+    public String getCommand() {
+        return command;
+    }
 
-
+    public void setCommand(String command) {
+        this.command = command;
+    }
 }

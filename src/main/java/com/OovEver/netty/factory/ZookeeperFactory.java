@@ -1,4 +1,4 @@
-package com.OovEver.factory;
+package com.OovEver.netty.factory;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

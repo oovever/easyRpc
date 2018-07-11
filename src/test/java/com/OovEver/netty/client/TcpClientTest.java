@@ -1,4 +1,4 @@
-package com.OovEver.client;
+package com.OovEver.netty.client;
 
 import org.junit.Test;
 

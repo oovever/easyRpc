@@ -25,12 +25,12 @@ public class InitalMedium implements BeanPostProcessor {
 //初始化之后
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
         if (o.getClass().isAnnotationPresent(Controller.class)) {
-            System.out.println("user");
             Method[] methods = o.getClass().getDeclaredMethods();
             for (Method m : methods) {
                 String key = o.getClass().getName() + "." + m.getName();
                 Map<String, BeanMethod> beanMethodMap = Media.beanMap;
                 BeanMethod beanMethod = new BeanMethod();
+                beanMethod.setBean(o);
                 beanMethod.setMethod(m);
                 beanMethodMap.put(key, beanMethod);
             }

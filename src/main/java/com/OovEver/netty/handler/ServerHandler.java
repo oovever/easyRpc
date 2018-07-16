@@ -1,6 +1,6 @@
 package com.OovEver.netty.handler;
 
-import com.OovEver.netty.client.Response;
+import com.OovEver.netty.util.Response;
 import com.OovEver.netty.handler.param.ServerRequest;
 import com.OovEver.netty.medium.Media;
 import com.alibaba.fastjson.JSONObject;
@@ -22,13 +22,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 //        ctx.channel().close();
        ServerRequest request=JSONObject.parseObject(msg.toString(), ServerRequest.class);
         Media media = Media.newInstance();
-        Object result = media.process(request);
-
-
-        Response response = new Response();
-        response.setId(request.getId());
-        response.setResult("is ok");
-        ctx.channel().writeAndFlush(JSONObject.toJSONString(response));
+        Response result = media.process(request);
+        ctx.channel().writeAndFlush(JSONObject.toJSONString(result));
         ctx.channel().writeAndFlush("\r\n");
     }
 

@@ -1,7 +1,7 @@
 package com.OovEver.netty.handler;
 
 import com.OovEver.netty.handler.param.ServerRequest;
-import com.OovEver.netty.client.Response;
+import com.OovEver.netty.util.Response;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

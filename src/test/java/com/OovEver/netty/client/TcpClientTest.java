@@ -1,5 +1,6 @@
 package com.OovEver.netty.client;
 
+import com.OovEver.netty.util.Response;
 import org.junit.Test;
 
 /**

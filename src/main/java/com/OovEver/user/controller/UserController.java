@@ -1,10 +1,13 @@
 package com.OovEver.user.controller;
 
+import com.OovEver.netty.util.Response;
+import com.OovEver.netty.util.ResponseUtil;
 import com.OovEver.user.Bean.User;
 import com.OovEver.user.Service.UserService;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author OovEver
@@ -14,7 +17,12 @@ import javax.annotation.Resource;
 public class UserController {
     @Resource
     private UserService userService;
-    public void saveUser(User user) {
+    public Response saveUser(User user) {
         userService.save(user);
+        return ResponseUtil.createSuccessResult(user);
+    }
+    public Response saveUsers(List<User> users) {
+        userService.saveList(users);
+        return ResponseUtil.createSuccessResult(users);
     }
 }

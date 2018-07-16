@@ -1,6 +1,7 @@
 package com.OovEver.netty.medium;
 
 import com.OovEver.netty.handler.param.ServerRequest;
+import com.OovEver.netty.util.Response;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.cglib.beans.BeanMap;
 
@@ -35,8 +36,8 @@ public class Media {
      * @param request 要处理的请求
      * @return 返回处理结果
      */
-    public Object process(ServerRequest request) {
-        Object result = null;
+    public Response process(ServerRequest request) {
+        Response result = null;
         try {
             String command = request.getCommand();
             BeanMethod beanMethod = beanMap.get(command);
@@ -48,7 +49,8 @@ public class Media {
             Class paramType=m.getParameterTypes()[0];
             Object content = request.getContent();
             Object args=JSONObject.parseObject(JSONObject.toJSONString(content), paramType);
-            result=m.invoke(bean, args);
+            result=(Response) m.invoke(bean, args);
+            result.setId(request.getId());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

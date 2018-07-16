@@ -1,5 +1,6 @@
 package com.OovEver.netty.init;
 
+import com.OovEver.netty.handler.ServerHandler;
 import com.OovEver.netty.handler.SimpleServerHandler;
 import com.OovEver.netty.constant.Constants;
 import com.OovEver.netty.factory.ZookeeperFactory;
@@ -59,7 +60,7 @@ public class NettyInital implements ApplicationListener<ContextRefreshedEvent> {
                             ch.pipeline().addLast(new StringDecoder());
 //                            心跳长连接设置 读空闲 写空闲 所有空闲 时间单位
                             ch.pipeline().addLast(new IdleStateHandler(60, 45, 20,TimeUnit.SECONDS));
-                            ch.pipeline().addLast(new SimpleServerHandler());
+                            ch.pipeline().addLast(new ServerHandler());
 //                        字符串编码器
                             ch.pipeline().addLast(new StringEncoder());
                         }

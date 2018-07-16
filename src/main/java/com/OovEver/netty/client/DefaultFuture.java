@@ -1,5 +1,7 @@
 package com.OovEver.netty.client;
 
+import com.OovEver.netty.util.Response;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
